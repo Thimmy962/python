@@ -2,6 +2,9 @@ class IsNotAlphaError(Exception):
     """Custom exception for input that is not an alphabet."""
     pass
 
+class LengthError(Exception):
+    pass
+
 def get_int(request):
     while True:
         try:
@@ -38,7 +41,7 @@ def get_alpha(request):
                 letter = input(request).lower()
 
                 if len(letter) != 1:
-                    raise ValueError("Length of input can't be greater than 1")
+                    raise LengthError("Length of input can't be greater than 1")
                 
                 if not letter.isalpha(): # if the letter is not an alphabet
                     raise IsNotAlphaError("Input must be an alphabet")

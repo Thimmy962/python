@@ -1,7 +1,7 @@
 # Python Program to illustrate 
 # Hangman Game 
 import random 
-from functions import get_alpha, IsNotAlphaError
+from functions import get_alpha, IsNotAlphaError, LengthError
 
 
 from collections import Counter
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
                 print(' '.join(revealed))
 
-        except ValueError as e:
+        except LengthError as e:
             print(e)
 
         except IsNotAlphaError as e:
