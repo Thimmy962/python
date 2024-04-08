@@ -40,7 +40,7 @@ def get_alpha(request):
                 if len(letter) != 1:
                     raise ValueError("Length of input can't be greater than 1")
                 
-                if letter not in "abcdefghijklmnopqrstuvwxyz":
+                if not letter.isalpha(): # if the letter is not an alphabet
                     raise IsNotAlphaError("Input must be an alphabet")
                 
                 return letter
