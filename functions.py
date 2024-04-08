@@ -1,3 +1,7 @@
+class IsNotAlphaError(Exception):
+    """Custom exception for input that is not an alphabet."""
+    pass
+
 def get_int(request):
     while True:
         try:
@@ -37,7 +41,7 @@ def get_alpha(request):
                     raise ValueError("Length of input can't be greater than 1")
                 
                 if letter not in "abcdefghijklmnopqrstuvwxyz":
-                    raise ValueError("Input must be an alphabet")
+                    raise IsNotAlphaError("Input must be an alphabet")
                 
                 return letter
         
