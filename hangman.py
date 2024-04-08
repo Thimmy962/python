@@ -1,8 +1,7 @@
 # Python Program to illustrate 
 # Hangman Game 
 import random 
-from functions import get_alpha
-
+from functions import get_alpha, IsNotAlphaError
 
 
 from collections import Counter
@@ -24,32 +23,28 @@ if __name__ == '__main__':
         print('_', end=' ') 
     print()
 
-    c = Counter(word.strip()) # create a counter instance
 
-    unique = sorted(c) # A sorted counter unstance works like a set
-    
+    revealed = ['_' if c.isalpha() else c for c in word]
+    unique = set(word.strip()) # create a counter instance
     entered  = set() # Set of correct input by user
-    
 
-    true = True
     
-    while true:
+    while "_" in revealed:
         try: 
-            choice = get_alpha("Choose an alphabet: ")
+            choice = get_alpha("Choose an alphabet: ") 
 
-            if choice in unique:
-                for i in word: # Loop through the random word
-                    if choice == i: # if user input is the current letter
-                        print(i, end=" ")
-                        entered.add(i)
+            if choice in unique:  # If the choice is among the letters of the word
+                for i, char in enumerate(word):  # Loop through the random word
+                    if char == choice:
+                        revealed[i] = choice  # Update revealed list
+                        entered.add(choice)  # Add choice to entered set
 
-                    else:
-                        print("_", end=" ")
-                print()
+                print(' '.join(revealed))
 
-        except ValueError:
-            print(ValueError)
+        except ValueError as e:
+            print(e)
 
-
-        if entered == unique:
-            true = False
+        except IsNotAlphaError as e:
+            print(e)
+    
+    print("Congratulations! You've guessed the word correctly.")
